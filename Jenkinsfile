@@ -33,7 +33,7 @@ pipeline {
                             transfers:[
                                 sshTransfer(
                                     sourceFiles:"**/*.jar",
-                                    removePrefix:"target/",
+
                                     remoteDirectory:"",
 
                                 )
