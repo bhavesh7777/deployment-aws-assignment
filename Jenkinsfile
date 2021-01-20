@@ -33,9 +33,8 @@ pipeline {
                             transfers:[
                                 sshTransfer(
                                     sourceFiles:"**/*.jar",
-
-                                    remoteDirectory:"",
-
+                                    remoteDirectory:"/target",
+                                    execCommand:"java -jar demo-SNAPSHOT.jar"
                                 )
                             ]
                         )
