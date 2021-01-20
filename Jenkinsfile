@@ -22,5 +22,26 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+        stage('publish over ssh') {
+            steps([$class: 'BapSshPromotionPublisherPlugin']) {
+                sshPublisher(
+                    continueOnError: false, failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName:"dev1",
+                            verbose: true,
+                            transfers:[
+                                sshTransfer(
+                                    sourceFiles:"**/*.jar",
+                                    removePrefix:"target/",
+                                    remoteDirectory:"",
+
+                                )
+                            ]
+                        )
+                    ]
+                )
+            }
+        }
     }
 }
