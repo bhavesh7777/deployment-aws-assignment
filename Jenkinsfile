@@ -10,7 +10,7 @@ pipeline {
             steps {
                 withSonarQubeEnv(installationName: 'sonarqube-server') {
                     sh 'mvn clean verify sonar:sonar'
-                    sleep 60;
+                    //sleep 60;
                 }
                 timeout(time: 2, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
@@ -34,7 +34,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles:"**/*.jar",
                                     remoteDirectory:"",
-                                    execCommand:"java -jar target/*.jar "
+                                    execCommand:"nohup java -jar target/*.jar &"
                                 )
                             ]
                         )
